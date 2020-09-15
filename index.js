@@ -9,6 +9,8 @@ const providersUrl =
   "https://gist.githubusercontent.com/josejbocanegra/d3b26f97573a823a9d0df4ec68fef45f/raw/66440575649e007a9770bcd480badcbbc6a41ba7/proveedores.json";
 
 const baseDir = "index.html";
+const clientsDir = "clientes.html";
+const providersDir = "proveedores.html";
 
 function clients(dataClients, callback) {
   fs.readFile(baseDir, "utf8", (err, data) => {
@@ -27,6 +29,9 @@ function clients(dataClients, callback) {
       });
 
       text = text.replace(/{{dataRows}}/g, rows);
+      fs.writeFile(clientsDir, text, (err) => {
+        if (err) console.log(err, "Error en escritura de archivo");
+      });
       callback(text);
     }
   });
@@ -49,6 +54,9 @@ function providers(dataProviders, callback) {
       });
 
       text = text.replace(/{{dataRows}}/g, rows);
+      fs.writeFile(providersDir, text, (err) => {
+        if (err) console.log(err, "Error en escritura de archivo");
+      });
       callback(text);
     }
   });
